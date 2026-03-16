@@ -4,89 +4,19 @@ date: 2026-03-16
 domains: ["quantum", "agriculture"]
 description: "Nitrogenase, the enzyme behind biological nitrogen fixation, has become quantum computing's most famous benchmark molecule. Understanding it could eliminate our dependence on synthetic fertilizer."
 sources:
-  - title: "Elucidating Reaction Mechanisms on Quantum Computers"
-    authors: "Reiher, M., Wiebe, N., Svore, K. M., Wecker, D., Troyer, M."
-    url: "https://doi.org/10.1073/pnas.1619152114"
-    journal: "Proceedings of the National Academy of Sciences"
-    year: 2017
-  - title: "The electronic complexity of the ground-state of the FeMo cofactor of nitrogenase as relevant to quantum simulations"
-    authors: "Li, Z., Li, J., Dattani, N. S., Umrigar, C. J., Chan, G. K.-L."
-    url: "https://doi.org/10.1063/1.5063376"
-    journal: "The Journal of Chemical Physics"
-    year: 2019
-  - title: "Quantum Chemistry in the Age of Quantum Computing"
-    authors: "Cao, Y., Romero, J., Olson, J. P., Degroote, M., Johnson, P. D., Kieferová, M., Kivlichan, I. D., Menke, T., Peropadre, B., Sawaya, N. P. D., Sim, S., Veis, L., Aspuru-Guzik, A."
-    url: "https://doi.org/10.1021/acs.chemrev.8b00803"
-    journal: "Chemical Reviews"
-    year: 2019
-  - title: "Even More Efficient Quantum Computations of Chemistry Through Tensor Hypercontraction"
-    authors: "Lee, J., Berry, D. W., Gidney, C., Huggins, W. J., McClean, J. R., Wiebe, N., Babbush, R."
-    url: "https://doi.org/10.1103/PRXQuantum.2.030305"
-    journal: "PRX Quantum"
-    year: 2021
-  - title: "Quantum Resource Estimation for Ground State Energy of FeMoco and P450 on Cat Qubits"
-    authors: "Alice & Bob"
-    url: "https://alice-bob.com/blog/cats-for-quantum-chemistry-cuttin-the-cost-of-complex-molecular-simulation/"
+  - title: "Example Source One"
+    authors: "Author, A., Author, B."
+    url: "https://example.com"
+    journal: "Example Journal"
+    year: 2024
+  - title: "Example Source Two"
+    authors: "Author, C., Author, D."
+    url: "https://example.com"
+    journal: "Example Journal"
     year: 2025
-  - title: "Classical solution of the FeMo-cofactor model to chemical accuracy and its implications"
-    authors: "Zhai, H. et al."
-    url: "https://arxiv.org/abs/2601.04621"
-    year: 2026
-stage: "harvest"
+stage: "seed"
 connections: []
 featured: true
 ---
 
-## The tension at the heart of modern farming
-
-Regenerative agriculture has a nitrogen problem. Not a shortage of it, but a dependence on the wrong source.
-
-The Haber-Bosch process, invented in 1909, converts atmospheric nitrogen into synthetic ammonia. It feeds roughly half the world's population. It also consumes 1-2% of global energy, accounts for about 3% of CO₂ emissions, and produces fertilizer that, over time, degrades soil microbial communities, disrupts mycorrhizal networks, and contaminates waterways. The very soil biology that regenerative farmers are trying to rebuild gets undermined by the nitrogen source most agriculture depends on.
-
-Nature solved this problem billions of years ago. Certain bacteria and archaea fix atmospheric nitrogen at ambient temperature and pressure, no fossil fuels required. They do it through an enzyme called **nitrogenase**. And the reason we can't just copy nature's solution is that we don't fully understand how it works.
-
-## The most complex molecule in biology
-
-At the heart of nitrogenase sits a cluster of atoms called the iron-molybdenum cofactor, or **FeMoco**. Seven iron atoms, one molybdenum, nine sulfur atoms, and a central carbon, all arranged in a cage-like structure. The electrons in this cluster are "strongly correlated," meaning they influence each other in ways that cannot be approximated by treating them independently.
-
-This is what makes FeMoco a nightmare for classical computation. Simulating its electronic structure accurately would require tracking an exponential number of quantum states. The best classical methods can handle simplified models of the molecule, but the full biological system, including its dynamics, solvent environment, and the actual catalytic mechanism, remains out of reach.
-
-Reiher et al. called understanding nitrogenase's mechanism "one of the greatest unsolved mysteries in chemistry."
-
-## Why quantum computers care about an enzyme
-
-In 2017, a team at ETH Zurich and Microsoft Research published a landmark paper showing that a quantum computer could simulate FeMoco with chemical accuracy using roughly 100-200 logical qubits (Reiher et al., 2017). This was significant not because anyone had that hardware yet, but because it established a concrete, scientifically meaningful target for quantum computing.
-
-FeMoco quickly became *the* benchmark molecule for the field. The reason is almost poetic: the same quantum mechanical complexity that makes FeMoco impossible for classical computers is exactly what quantum computers are designed to handle. A quantum processor can represent strongly correlated electron systems natively, encoding quantum states in qubits rather than trying to approximate them classically.
-
-Two years later, Li et al. refined the computational model, establishing a 76-orbital, 152-qubit representation (the "LLDUC model") that became the standard benchmark against which quantum chemistry algorithms are measured (Li et al., 2019).
-
-## The shrinking resource estimate
-
-Since 2017, the estimated cost of simulating FeMoco on a quantum computer has dropped dramatically:
-
-- **2017**: Reiher et al. estimated ~4,000 logical qubits with early fault-tolerant methods
-- **2021**: Lee et al. at Google showed it could be done with ~4 million physical qubits in under four days, using tensor hypercontraction to compress the quantum circuits (Lee et al., 2021)
-- **2025**: Alice & Bob demonstrated that their cat qubit architecture could cut the physical qubit requirement by 27x, from ~2.7 million down to ~99,000, bringing practical simulation within a near-term hardware horizon
-
-Meanwhile, the qHPC-GREEN project (2025-2029), funded at €1.8 million by the German Federal Ministry of Education and Research, is building hybrid quantum-classical workflows specifically targeting nitrogenase simulation. The project partners include IBM Research Zurich and aims to design biocatalysts that could replace industrial ammonia synthesis.
-
-## The plot twist: classical fights back
-
-In January 2026, Zhai et al. published a result that complicated the narrative. Using density matrix renormalization group (DMRG) methods on classical hardware, they solved the LLDUC benchmark model of FeMoco to chemical accuracy.
-
-This is a real result and it matters. It means the simplified 76-orbital model that the quantum computing community had been using as its flagship benchmark can, in fact, be handled classically.
-
-But here's the nuance: the LLDUC model is a *reduced* representation of FeMoco. The full biological picture includes larger active spaces, the protein environment surrounding the cofactor, solvent effects, and the actual dynamics of the catalytic cycle (how nitrogenase breaks the triple bond in N₂ step by step). These aspects remain firmly beyond classical reach.
-
-The Zhai result doesn't invalidate the quantum computing approach. It sharpens it. The question is no longer "can we solve the benchmark?" but "can we simulate the full mechanism under realistic biological conditions?" That is where quantum advantage is expected to be genuine and durable.
-
-## What this means for regenerative agriculture
-
-The practical goal is not abstract. If we understand the nitrogenase mechanism well enough, we could design synthetic catalysts that fix nitrogen the way biology does: at room temperature, at atmospheric pressure, powered by renewable energy instead of natural gas.
-
-For regenerative agriculture, this would be transformative. Farmers who currently rely on legume cover crops and careful rotation to introduce biological nitrogen could have access to biomimetic catalysts that supplement natural fixation without the soil-destroying side effects of Haber-Bosch ammonia. The entire logic of nutrient management changes when you remove synthetic nitrogen from the equation.
-
-This is not a near-term outcome. The hardware, the algorithms, and the agricultural engineering all need to mature. But the research trajectory is clear, funded, and accelerating. And the connection between these two fields, quantum computing and soil health, is one that neither community is talking about enough.
-
-A single enzyme, sitting at the intersection of quantum physics and soil biology, might be the key to feeding the world without destroying the ground beneath it.
+Content coming soon.
