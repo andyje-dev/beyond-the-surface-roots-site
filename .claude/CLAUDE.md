@@ -24,7 +24,16 @@ The owner is a Senior Software Engineer doing R&D in generative AI and quantum c
 - **Shiki** — for code syntax highlighting in articles (Astro-native)
 
 ### Deployment
-- Target: Vercel or Netlify (static)
+- **Vercel** (static) — auto-deploys from `main` branch
+- **Domain**: `beyond-the-surface-roots.com`
+
+### SEO & Analytics
+- **@astrojs/sitemap** — auto-generates `sitemap-index.xml` at build time
+- **Plausible Analytics** (`@plausible/tracker`) — privacy-friendly, cookie-free analytics
+- **RSS feed** at `/rss.xml` via `@astrojs/rss`
+- **`robots.txt`** — allows all crawlers, points to sitemap
+- **Google Search Console** — verified and sitemap submitted
+- **PWA manifest** (`public/site.webmanifest`) with branded icons
 
 ### Important CSS Note
 Tailwind v4 utility classes combined with CSS custom properties (e.g., `class="mx-auto" style="max-width: var(--max-width-site)"`) do not work reliably — the centering/max-width fails silently. **Always use inline styles for layout containers**: `style="max-width: 1400px; margin: 0 auto; padding: ..."`. Use Tailwind utilities only for properties that don't depend on CSS custom properties.
@@ -139,6 +148,8 @@ Domain colors defined in `src/config/domains.ts`:
 /exploration            Network graph visualization with domain filtering
 /exploration/[slug]     Individual exploration (planned)
 /about                  Site mission and author bio
+/rss.xml                RSS feed
+/404                    Custom 404 page
 ```
 
 ### Navigation
@@ -157,10 +168,8 @@ Domain colors defined in `src/config/domains.ts`:
 
 ## Content Model
 
-### Two Content Types (both surfaced on /curation)
-
-#### Research Briefs (`src/content/research/*.mdx`)
-Curated highlights of important external research with source citations.
+### Curation (`src/content/curation/*.mdx`)
+Unified collection for both curated research briefs and original essays. Research briefs include `sources`; essays omit them.
 
 **Frontmatter:**
 ```yaml
@@ -168,30 +177,18 @@ title: string
 date: date
 domains: string[]      # 1+ required
 description: string
-sources:               # External papers/articles
+sources:               # Optional — included for research briefs
   - title: string
     authors: string
     url: string
     journal: string    # Optional
     year: number
+stage: seed | growing | harvest   # Default: seed
 connections: string[]
 featured: boolean
 ```
 
-#### Original Essays (`src/content/writing/*.mdx`)
-Long-form thinking connecting threads across domains.
-
-**Frontmatter:**
-```yaml
-title: string
-date: date
-domains: string[]
-description: string
-connections: string[]
-featured: boolean
-```
-
-#### Explorations (`src/content/exploration/*.mdx`) — planned
+### Explorations (`src/content/exploration/*.mdx`) — planned
 Interactive pieces — simulations, data visualizations, tools.
 
 ### Domain Registry (`src/config/domains.ts`)
@@ -222,8 +219,7 @@ src/
 │   ├── domains.ts                 # Domain registry (colors, labels, descriptions)
 │   └── site.ts                    # Site metadata, nav structure
 ├── content/
-│   ├── research/                  # MDX research briefs
-│   ├── writing/                   # MDX original essays
+│   ├── curation/                  # MDX research briefs and essays
 │   └── exploration/               # MDX exploration content (planned)
 ├── content.config.ts              # Astro Content Layer schemas (Zod)
 ├── layouts/
@@ -231,6 +227,8 @@ src/
 ├── pages/
 │   ├── index.astro                # Landing page
 │   ├── about.astro                # Site mission and author bio
+│   ├── 404.astro                  # Custom 404 page
+│   ├── rss.xml.ts                 # RSS feed generation
 │   ├── curation/
 │   │   ├── index.astro            # Filterable content grid
 │   │   └── [slug].astro           # Individual article with prose styles

@@ -1,25 +1,41 @@
 # btsr — beyond the surface roots
 
-A personal website exploring the intersections of technology, nature, design, and policy.
+Discover at the intersection of technology, nature, design, and policy.
+
+A personal site built with [Astro 6](https://astro.build), React islands, and Tailwind CSS v4. Content lives in MDX, rendered statically, deployed on Vercel.
+
+## Getting Started
+
+```bash
+npm install
+npm run dev       # Start dev server at localhost:4321
+npm run build     # Production build to dist/
+npm run preview   # Preview production build locally
+```
 
 ## Tech Stack
 
-- **Astro 6** + React islands
-- **Tailwind CSS v4**
-- **D3.js** for network visualization
-- **TypeScript** throughout
+- **Astro 6** — static site framework with MDX support
+- **React** — interactive islands (theme toggle, network graph, filterable grids)
+- **Tailwind CSS v4** — utility styling via Vite plugin
+- **D3.js** — force-directed network graph on /exploration
+- **Plausible** — privacy-friendly analytics (no cookies)
 
-## Development
+## Project Structure
 
-```sh
-npm install
-npm run dev
+```
+src/
+├── components/       # Astro + React components
+├── config/           # Domain registry, site metadata
+├── content/
+│   ├── curation/     # MDX research briefs and essays
+│   └── exploration/  # MDX interactive explorations (planned)
+├── layouts/          # BaseLayout with theme, fonts, meta
+├── pages/            # Routes: /, /curation, /exploration, /about, /404, /rss.xml
+├── styles/           # Global CSS, design tokens
+└── utils/            # Domain helpers, reading time
 ```
 
-## Commands
+## Deployment
 
-| Command           | Action                                  |
-| :---------------- | :-------------------------------------- |
-| `npm run dev`     | Start local dev server at `localhost:4321` |
-| `npm run build`   | Build production site to `./dist/`      |
-| `npm run preview` | Preview build locally before deploying  |
+Deployed on **Vercel** at [beyond-the-surface-roots.com](https://beyond-the-surface-roots.com). Pushes to `main` trigger automatic deploys.
