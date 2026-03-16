@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import authorImage from "../assets/images/andy.jpg";
+---
+
+<BaseLayout title="About" description="About beyond the surface roots and the person behind it.">
+  <article
+    style={`max-width: 1400px; margin: 0 auto; padding: 5rem 2.5rem 6rem;`}
+  >
+    <!-- Site section -->
+    <section style={`max-width: 680px; margin: 0 auto;`}>
+      <h1 style={`font-size: var(--text-3xl); margin-bottom: 1rem;`}>
+        beyond the <span style={`color: var(--accent-primary);`}>surface roots</span>
+      </h1>
+      <div
+        style={`
+          font-family: var(--font-serif);
+          font-size: var(--text-lg);
+          color: var(--text-secondary);
+          line-height: 1.8;
+        `}
+      >
+        <p style={`margin-bottom: 1.5rem;`}>
+          Live oaks don't hide their roots. They crack sidewalks in slow motion and buckle concrete into uneven ridges you learn to navigate over time. They swallow curbs whole and carve potholes that widen over years until the street itself takes on a natural form. Step onto any oak lined avenue and you're walking on top of something ancient and ungovernable. Surface roots that were there before the pavement and that will continue growing.
+        </p>
+        <p style={`margin-bottom: 1.5rem;`}>
+          The most complex global challenges of today's world look the same way.
+          <br />
+          Food security, climate change, sustainable agriculture, human rights, digital equity. Breakthroughs here won't come from deep research into one field alone. They'll come from the places where technology meets nature, where design meets policy, and where the connections beneath the surface finally become visible.
+        </p>
+        <p style={`margin-bottom: 1.5rem;`}>
+          <strong style={`color: var(--text-primary);`}>beyond the <span style={`color: var(--accent-primary);`}>surface roots</span></strong> exists to uncover those connections. It curates writing, research, data, and implementations across domains, mapping how ideas relate to each other.
+        </p>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <hr style={`border: none; border-top: 1px solid var(--text-ghost); margin: 3.5rem auto; max-width: 680px;`} />
+
+    <!-- Person section -->
+    <section style={`max-width: 680px; margin: 0 auto;`}>
+      <Image
+        src={authorImage}
+        alt="Andy Rodrigue"
+        width={280}
+        height={280}
+        loading="eager"
+        style={`
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-bottom: 1.5rem;
+          border: 3px solid var(--text-ghost);
+        `}
+      />
+      <h2
+        style={`
+          font-size: var(--text-2xl);
+          margin-bottom: 1.5rem;
+        `}
+      >
+        About Andy Rodrigue
+      </h2>
+      <div
+        style={`
+          font-family: var(--font-serif);
+          font-size: var(--text-lg);
+          color: var(--text-secondary);
+          line-height: 1.8;
+        `}
+      >
+        <p style={`margin-bottom: 1.5rem;`}>
+          I'm a software engineer at a Fortune 100 company doing R&D in generative AI and building frameworks for technology teams across the globe. I'm curious about how emerging technologies will change how we approach and solve the world's most challenging problems.
+        </p>
+        <p style={`margin-bottom: 1.5rem;`}>
+          My interests include quantum computing, agriculture, climate change, human rights, design, architecture, education, and more. I created this site to explore the intersections of these topics and connect with others who are thinking about them too.
+        </p>
+        <p>
+          If any of this resonates, I'd love to hear from you. Reach out on <a href="https://www.linkedin.com/in/andy-rodrigue/" target="_blank" rel="noopener noreferrer" style={`color: var(--accent-primary);`}>LinkedIn</a> or <a href="mailto:andy.rodrigue99@gmail.com" style={`color: var(--accent-primary);`}>by email</a>.
+        </p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

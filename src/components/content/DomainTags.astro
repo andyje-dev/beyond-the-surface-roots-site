@@ -1,0 +1,13 @@
+---
+import DomainTag from "./DomainTag.astro";
+
+interface Props {
+  domains: string[];
+}
+
+const { domains } = Astro.props;
+---
+
+<div class="flex flex-wrap items-center gap-2">
+  {domains.map((domain) => <DomainTag domain={domain} />)}
+</div>

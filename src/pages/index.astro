@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContentCard from "../components/content/ContentCard.astro";
+import ContentGrid from "../components/content/ContentGrid.astro";
+import { getCollection } from "astro:content";
+import { estimateReadingTime } from "../utils/reading-time";
+
+const research = await getCollection("research");
+const writing = await getCollection("writing");
+
+const allContent = [
+  ...research.map((entry) => ({
+    ...entry,
+    type: "brief" as const,
+    href: `/curation/${entry.id}`,
+  })),
+  ...writing.map((entry) => ({
+    ...entry,
+    type: "essay" as const,
+    href: `/curation/${entry.id}`,
+  })),
+].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const featured = allContent.find((c) => c.data.featured);
+const recent = allContent.filter((c) => c !== featured).slice(0, 6);
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section
+    class="flex flex-col items-center px-6"
+    style={`padding-top: 7rem; padding-bottom: 4rem;`}
+  >
+    <h1
+      style={`font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.15; text-align: center; margin-bottom: 4rem;`}
+    >
+      beyond the{" "}
+      <span style={`color: var(--accent-primary);`}>surface roots</span>
+    </h1>
+    <p
+      style={`max-width: var(--max-width-prose); font-size: var(--text-lg); color: var(--text-secondary); line-height: 1.8; text-align: center;`}
+    >
+      Discover at the intersection of technology, nature, design, and policy.
+    </p>
+  </section>
+
+  <!-- CTA -->
+  <section class="flex justify-center" style={`padding-bottom: 2rem;`}>
+    <a
+      href="/exploration"
+      class="inline-flex items-center gap-2 no-underline hover:no-underline"
+      style={`
+        font-family: var(--font-sans);
+        font-weight: 500;
+        font-size: var(--text-sm);
+        color: var(--bg-void);
+        background-color: var(--accent-primary);
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius-md);
+        transition: opacity 0.2s;
+      `}
+    >
+      Explore
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+  </section>
+
+  <!-- Wave pattern -->
+  <section class="overflow-hidden" style={`opacity: 0.3;`}>
+    <svg
+      viewBox="0 0 1600 300"
+      preserveAspectRatio="none"
+      class="w-full"
+      style={`height: 180px;`}
+      aria-hidden="true"
+    >
+      <path
+        d="M0,150 C270,30 530,270 800,150 C1070,30 1330,270 1600,150"
+        fill="none"
+        stroke="var(--accent-primary)"
+        stroke-width="2"
+      />
+      <path
+        d="M0,120 C270,260 530,10 800,120 C1070,260 1330,10 1600,120"
+        fill="none"
+        stroke="var(--domain-quantum)"
+        stroke-width="2"
+      />
+      <path
+        d="M0,180 C270,50 530,240 800,180 C1070,50 1330,240 1600,180"
+        fill="none"
+        stroke="var(--domain-climate)"
+        stroke-width="2"
+      />
+    </svg>
+  </section>
+
+  <!-- Featured -->
+  {featured && (
+    <section
+      style={`max-width: 1400px; margin: 0 auto; padding: 5rem 2.5rem 3rem;`}
+    >
+      <h2 style={`font-size: var(--text-2xl); margin-bottom: 2rem;`}>Featured</h2>
+      <ContentGrid>
+        <ContentCard
+          title={featured.data.title}
+          description={featured.data.description}
+          href={featured.href}
+          domains={featured.data.domains}
+
+          date={featured.data.date}
+          type={featured.type}
+          readingTime={estimateReadingTime(featured.body ?? "")}
+        />
+      </ContentGrid>
+    </section>
+  )}
+
+  <!-- Recent -->
+  <section
+    style={`max-width: 1400px; margin: 0 auto; padding: 3rem 2.5rem 6rem;`}
+  >
+    <h2 style={`font-size: var(--text-2xl); margin-bottom: 2rem;`}>Recent</h2>
+    <ContentGrid>
+      {recent.map((entry) => (
+        <ContentCard
+          title={entry.data.title}
+          description={entry.data.description}
+          href={entry.href}
+          domains={entry.data.domains}
+
+          date={entry.data.date}
+          type={entry.type}
+          readingTime={estimateReadingTime(entry.body ?? "")}
+        />
+      ))}
+    </ContentGrid>
+  </section>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  columns?: 1 | 2 | 3;
+}
+
+const { columns = 3 } = Astro.props;
+---
+
+<div
+  class="content-grid"
+  style={`
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(${columns}, 1fr);
+  `}
+>
+  <slot />
+</div>
+
+<style is:global>
+  @media (max-width: 1023px) {
+    .content-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .content-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

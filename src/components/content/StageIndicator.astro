@@ -1,0 +1,25 @@
+---
+interface Props {
+  stage: "seed" | "growing" | "harvest";
+}
+
+const { stage } = Astro.props;
+
+const icons: Record<string, string> = {
+  seed: "🌱",
+  growing: "🌿",
+  harvest: "🌾",
+};
+---
+
+<span
+  style={`
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    white-space: nowrap;
+  `}
+>
+  <span aria-hidden="true">{icons[stage]}</span>
+  {stage}
+</span>

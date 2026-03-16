@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NetworkGraph from "../../components/exploration/NetworkGraph.tsx";
+import { getCollection } from "astro:content";
+import { domains } from "../../config/domains";
+
+const research = await getCollection("research");
+const writing = await getCollection("writing");
+
+const allContent = [
+  ...research.map((entry) => ({
+    id: entry.id,
+    title: entry.data.title,
+    type: "brief" as const,
+    domains: entry.data.domains,
+    connections: entry.data.connections,
+    href: `/curation/${entry.id}`,
+  })),
+  ...writing.map((entry) => ({
+    id: entry.id,
+    title: entry.data.title,
+    type: "essay" as const,
+    domains: entry.data.domains,
+    connections: entry.data.connections,
+    href: `/curation/${entry.id}`,
+  })),
+];
+
+// Build nodes for the graph
+const nodes = allContent.map(({ id, title, type, domains, href }) => ({
+  id,
+  title,
+  type,
+  domains,
+  href,
+}));
+
+// Build links from explicit connections
+const nodeIds = new Set(allContent.map((c) => c.id));
+const linkSet = new Set<string>();
+const links: { source: string; target: string }[] = [];
+
+for (const entry of allContent) {
+  for (const connId of entry.connections) {
+    if (!nodeIds.has(connId)) continue;
+    const key = [entry.id, connId].sort().join("--");
+    if (linkSet.has(key)) continue;
+    linkSet.add(key);
+    links.push({ source: entry.id, target: connId });
+  }
+}
+
+// Count articles per domain
+const domainCounts = new Map<string, number>();
+for (const entry of allContent) {
+  for (const d of entry.domains) {
+    domainCounts.set(d, (domainCounts.get(d) || 0) + 1);
+  }
+}
+
+// Domain info for the graph component (with description and count)
+const domainInfo = domains.map((d) => ({
+  id: d.id,
+  label: d.label,
+  colorDark: d.color.dark,
+  colorLight: d.color.light,
+  description: d.description,
+  count: domainCounts.get(d.id) || 0,
+}));
+---
+
+<BaseLayout title="Exploration" description="Visualize connections across research domains.">
+  <section
+    style={`max-width: 1400px; margin: 0 auto; padding: 5rem 2.5rem 6rem;`}
+  >
+    <h1 style={`font-size: var(--text-3xl); margin-bottom: 1rem;`}>Exploration</h1>
+    <p style={`color: var(--text-secondary); max-width: 680px; margin-bottom: 3rem;`}>
+      A living map of how ideas connect. Drag to rearrange, scroll to zoom, click to read.
+    </p>
+
+    <NetworkGraph
+      client:only="react"
+      nodes={nodes}
+      links={links}
+      domains={domainInfo}
+    />
+  </section>
+</BaseLayout>

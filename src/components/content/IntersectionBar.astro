@@ -1,0 +1,24 @@
+---
+interface Props {
+  domains: string[];
+}
+
+const { domains } = Astro.props;
+
+import { getDomainColor, getIntersectionGradient } from "../../utils/domains";
+
+const bg =
+  domains.length === 1
+    ? `var(--domain-${domains[0]}, ${getDomainColor(domains[0])})`
+    : getIntersectionGradient(domains);
+---
+
+<div
+  class="intersection-bar"
+  style={`
+    height: 3px;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: ${bg};
+  `}
+  aria-hidden="true"
+/>
