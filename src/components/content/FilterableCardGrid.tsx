@@ -115,7 +115,7 @@ export default function FilterableCardGrid({ entries, domains }: Props) {
       </div>
 
       {/* Card grid */}
-      <div className="content-grid" style={{ display: "grid", gap: "1.5rem", gridTemplateColumns: "repeat(3, 1fr)" }}>
+      <div className="content-grid">
         {filtered.map((entry) => (
           <article
             key={entry.href}
