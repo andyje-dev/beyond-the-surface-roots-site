@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://beyond-the-surface-roots.com/sitemap.xml
