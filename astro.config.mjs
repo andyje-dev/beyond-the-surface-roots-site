@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://beyond-the-surface-roots.dev',
   integrations: [react(), mdx()],
   vite: {
     plugins: [tailwindcss()],

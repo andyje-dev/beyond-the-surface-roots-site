@@ -5,26 +5,16 @@ import { getCollection } from "astro:content";
 import { estimateReadingTime } from "../../utils/reading-time";
 import { domains } from "../../config/domains";
 
-const research = await getCollection("research");
-const writing = await getCollection("writing");
+const curation = await getCollection("curation");
 
 const allEntries = [
-  ...research.map((entry) => ({
+  ...curation.map((entry) => ({
     title: entry.data.title,
     description: entry.data.description,
     href: `/curation/${entry.id}`,
     domains: entry.data.domains,
     date: entry.data.date.toISOString(),
     type: "brief" as const,
-    readingTime: estimateReadingTime(entry.body ?? ""),
-  })),
-  ...writing.map((entry) => ({
-    title: entry.data.title,
-    description: entry.data.description,
-    href: `/curation/${entry.id}`,
-    domains: entry.data.domains,
-    date: entry.data.date.toISOString(),
-    type: "essay" as const,
     readingTime: estimateReadingTime(entry.body ?? ""),
   })),
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

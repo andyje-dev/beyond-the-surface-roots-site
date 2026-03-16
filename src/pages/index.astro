@@ -5,18 +5,12 @@ import ContentGrid from "../components/content/ContentGrid.astro";
 import { getCollection } from "astro:content";
 import { estimateReadingTime } from "../utils/reading-time";
 
-const research = await getCollection("research");
-const writing = await getCollection("writing");
+const curation = await getCollection("curation");
 
 const allContent = [
-  ...research.map((entry) => ({
+  ...curation.map((entry) => ({
     ...entry,
     type: "brief" as const,
-    href: `/curation/${entry.id}`,
-  })),
-  ...writing.map((entry) => ({
-    ...entry,
-    type: "essay" as const,
     href: `/curation/${entry.id}`,
   })),
 ].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -79,19 +73,49 @@ const recent = allContent.filter((c) => c !== featured).slice(0, 6);
         fill="none"
         stroke="var(--accent-primary)"
         stroke-width="2"
-      />
+      >
+        <animate
+          attributeName="d"
+          values="M0,150 C270,30 530,270 800,150 C1070,30 1330,270 1600,150;
+                  M0,140 C270,50 530,250 800,160 C1070,50 1330,250 1600,140;
+                  M0,160 C270,20 530,280 800,140 C1070,20 1330,280 1600,160;
+                  M0,150 C270,30 530,270 800,150 C1070,30 1330,270 1600,150"
+          dur="12s"
+          repeatCount="indefinite"
+        />
+      </path>
       <path
         d="M0,120 C270,260 530,10 800,120 C1070,260 1330,10 1600,120"
         fill="none"
         stroke="var(--domain-quantum)"
         stroke-width="2"
-      />
+      >
+        <animate
+          attributeName="d"
+          values="M0,120 C270,260 530,10 800,120 C1070,260 1330,10 1600,120;
+                  M0,130 C270,240 530,30 800,110 C1070,240 1330,30 1600,130;
+                  M0,110 C270,270 530,0 800,130 C1070,270 1330,0 1600,110;
+                  M0,120 C270,260 530,10 800,120 C1070,260 1330,10 1600,120"
+          dur="15s"
+          repeatCount="indefinite"
+        />
+      </path>
       <path
         d="M0,180 C270,50 530,240 800,180 C1070,50 1330,240 1600,180"
         fill="none"
         stroke="var(--domain-climate)"
         stroke-width="2"
-      />
+      >
+        <animate
+          attributeName="d"
+          values="M0,180 C270,50 530,240 800,180 C1070,50 1330,240 1600,180;
+                  M0,170 C270,70 530,220 800,190 C1070,70 1330,220 1600,170;
+                  M0,190 C270,40 530,250 800,170 C1070,40 1330,250 1600,190;
+                  M0,180 C270,50 530,240 800,180 C1070,50 1330,240 1600,180"
+          dur="18s"
+          repeatCount="indefinite"
+        />
+      </path>
     </svg>
   </section>
 

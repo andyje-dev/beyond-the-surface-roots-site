@@ -1,0 +1,26 @@
+{
+  "name": "btsr — beyond the surface roots",
+  "short_name": "btsr",
+  "description": "Discover at the intersection of technology, nature, design, and policy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C0F0A",
+  "theme_color": "#6EE7A0",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/icons/btsr-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/btsr-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

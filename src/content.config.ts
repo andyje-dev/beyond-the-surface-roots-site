@@ -3,8 +3,8 @@ import { glob } from "astro/loaders";
 
 const stage = z.enum(["seed", "growing", "harvest"]);
 
-const research = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/research" }),
+const curation = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/curation" }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -27,19 +27,6 @@ const research = defineCollection({
   }),
 });
 
-const writing = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/writing" }),
-  schema: z.object({
-    title: z.string(),
-    date: z.coerce.date(),
-    domains: z.array(z.string()).min(1),
-    description: z.string(),
-    stage: stage.default("seed"),
-    connections: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
-  }),
-});
-
 const exploration = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/exploration" }),
   schema: z.object({
@@ -53,4 +40,4 @@ const exploration = defineCollection({
   }),
 });
 
-export const collections = { research, writing, exploration };
+export const collections = { curation, exploration };

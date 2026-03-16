@@ -23,6 +23,16 @@ const siteDescription =
     <meta name="description" content={siteDescription} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/btsr-192x192.png" />
+    <link rel="apple-touch-icon" href="/icons/btsr-apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0C0F0A" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="btsr" href="/rss.xml" />
+
+    <!-- Analytics — Plausible (privacy-friendly, no cookies) -->
+    <script is:inline src="https://plausible.io/js/script.js" defer data-domain="beyond-the-surface-roots.dev"></script>
 
     <!-- Preload critical fonts -->
     <link

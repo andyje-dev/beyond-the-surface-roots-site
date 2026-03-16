@@ -5,17 +5,12 @@ import { getCollection, render } from "astro:content";
 import { estimateReadingTime } from "../../utils/reading-time";
 
 export async function getStaticPaths() {
-  const research = await getCollection("research");
-  const writing = await getCollection("writing");
+  const curation = await getCollection("curation");
 
   return [
-    ...research.map((entry) => ({
+    ...curation.map((entry) => ({
       params: { slug: entry.id },
       props: { entry, type: "brief" as const },
-    })),
-    ...writing.map((entry) => ({
-      params: { slug: entry.id },
-      props: { entry, type: "essay" as const },
     })),
   ];
 }

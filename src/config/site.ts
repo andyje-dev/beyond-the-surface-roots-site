@@ -2,7 +2,7 @@ export const site = {
   title: "btsr",
   description:
     "Discover at the intersection of technology, nature, design, and policy.",
-  url: "https://entangled.dev",
+  url: "https://beyond-the-surface-roots.dev",
 };
 
 export const nav = [
