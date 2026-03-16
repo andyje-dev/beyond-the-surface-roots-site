@@ -213,12 +213,16 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
+  function initMobileMenu() {
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
 
-  btn?.addEventListener("click", () => {
-    const isOpen = menu?.classList.toggle("open");
-    btn.setAttribute("aria-expanded", String(isOpen));
-    btn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-  });
+    btn?.addEventListener("click", () => {
+      const isOpen = menu?.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+      btn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+  }
+  initMobileMenu();
+  document.addEventListener("astro:after-swap", initMobileMenu);
 </script>
