@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="RSS Feed" description="Subscribe to btsr via RSS">
+  <section
+    class="flex flex-col items-center justify-center px-6"
+    style={`min-height: 60vh; text-align: center;`}
+  >
+    <svg
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      style={`color: var(--accent-primary); margin-bottom: 1.5rem;`}
+    >
+      <circle cx="6.18" cy="17.82" r="2.18" />
+      <path
+        d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"
+      />
+    </svg>
+
+    <h1
+      style={`font-family: var(--font-mono); font-weight: 500; font-size: clamp(1.25rem, 3vw, 1.75rem); margin-bottom: 1rem;`}
+    >
+      Subscribe via RSS
+    </h1>
+
+    <p
+      style={`color: var(--text-secondary); font-size: var(--text-base); max-width: 480px; margin-bottom: 2rem; line-height: 1.7;`}
+    >
+      Get new posts delivered to your favorite feed reader. Copy the URL below
+      and add it to apps like <strong>Feedly</strong>, <strong>NetNewsWire</strong>,
+      or <strong>Inoreader</strong>.
+    </p>
+
+    <div
+      class="flex items-center gap-0"
+      style={`
+        background-color: var(--bg-surface);
+        border: 1px solid var(--text-ghost);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        max-width: 480px;
+        width: 100%;
+      `}
+    >
+      <input
+        type="text"
+        readonly
+        value="/rss.xml"
+        id="rss-url"
+        style={`
+          flex: 1;
+          background: transparent;
+          border: none;
+          padding: 0.75rem 1rem;
+          font-family: var(--font-mono);
+          font-size: var(--text-sm);
+          color: var(--text-primary);
+          outline: none;
+        `}
+      />
+      <button
+        id="copy-btn"
+        style={`
+          font-family: var(--font-sans);
+          font-weight: 500;
+          font-size: var(--text-sm);
+          color: var(--bg-void);
+          background-color: var(--accent-primary);
+          border: none;
+          padding: 0.75rem 1.25rem;
+          cursor: pointer;
+          transition: opacity 0.2s;
+          white-space: nowrap;
+        `}
+      >
+        Copy URL
+      </button>
+    </div>
+
+    <p
+      id="copy-feedback"
+      style={`
+        color: var(--accent-primary);
+        font-family: var(--font-sans);
+        font-size: var(--text-sm);
+        margin-top: 0.75rem;
+        min-height: 1.25rem;
+      `}
+    ></p>
+
+    <a
+      href="/rss.xml"
+      style={`
+        color: var(--text-muted);
+        font-family: var(--font-sans);
+        font-size: var(--text-sm);
+        margin-top: 1rem;
+      `}
+    >
+      Or open the raw feed &rarr;
+    </a>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("rss-url");
+    const btn = document.getElementById("copy-btn");
+    const feedback = document.getElementById("copy-feedback");
+    const fullUrl = window.location.origin + "/rss.xml";
+
+    input.value = fullUrl;
+
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(fullUrl);
+        feedback.textContent = "Copied!";
+        setTimeout(() => { feedback.textContent = ""; }, 2000);
+      } catch {
+        input.select();
+        feedback.textContent = "Press Ctrl+C to copy";
+      }
+    });
+  });
+</script>
