@@ -67,10 +67,10 @@ const siteDescription =
       })();
     </script>
   </head>
-  <body>
+  <body style="min-height: 100dvh; display: flex; flex-direction: column;">
     <a href="#main-content" class="skip-to-content">Skip to content</a>
     <Nav />
-    <main id="main-content">
+    <main id="main-content" style="flex: 1;">
       <slot />
     </main>
     <Footer />
