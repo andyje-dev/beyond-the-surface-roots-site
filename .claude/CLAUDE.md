@@ -48,10 +48,10 @@ Tailwind v4 utility classes combined with CSS custom properties (e.g., `class="m
 - This mirrors the hero heading where "beyond the" is in primary text color and "surface roots" is in accent green
 
 ### Logo
-- Abstract branching network SVG — a central node with asymmetric paths radiating outward, tapering in weight, ending in small fading dots
-- Evokes roots and connections without being a literal root illustration
-- Uses `--accent-primary` color throughout
-- Defined inline in Nav.astro, matching version in `public/favicon.svg`
+- "Subterranean Cartography" — a detailed root network illustration with branching tendrils
+- Two theme variants: `public/subterranean-cartography-dark.png` (light roots on dark bg) and `public/subterranean-cartography-light.png` (dark roots on light bg)
+- Displayed in Nav.astro as `<img>` elements, toggled via CSS based on `data-theme`
+- Also used as favicon with `prefers-color-scheme` media queries
 
 ---
 
