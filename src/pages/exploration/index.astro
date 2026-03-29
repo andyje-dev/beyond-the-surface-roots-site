@@ -1,62 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NetworkGraph from "../../components/exploration/NetworkGraph.tsx";
-import { getCollection } from "astro:content";
 import { domains } from "../../config/domains";
 
-const curation = await getCollection("curation");
-
-const allContent = [
-  ...curation.map((entry) => ({
-    id: entry.id,
-    title: entry.data.title,
-    type: "brief" as const,
-    domains: entry.data.domains,
-    connections: entry.data.connections,
-    href: `/curation/${entry.id}`,
-  })),
-];
-
-// Build nodes for the graph
-const nodes = allContent.map(({ id, title, type, domains, href }) => ({
-  id,
-  title,
-  type,
-  domains,
-  href,
-}));
-
-// Build links from explicit connections
-const nodeIds = new Set(allContent.map((c) => c.id));
-const linkSet = new Set<string>();
-const links: { source: string; target: string }[] = [];
-
-for (const entry of allContent) {
-  for (const connId of entry.connections) {
-    if (!nodeIds.has(connId)) continue;
-    const key = [entry.id, connId].sort().join("--");
-    if (linkSet.has(key)) continue;
-    linkSet.add(key);
-    links.push({ source: entry.id, target: connId });
-  }
-}
-
-// Count articles per domain
-const domainCounts = new Map<string, number>();
-for (const entry of allContent) {
-  for (const d of entry.domains) {
-    domainCounts.set(d, (domainCounts.get(d) || 0) + 1);
-  }
-}
-
-// Domain info for the graph component (with description and count)
 const domainInfo = domains.map((d) => ({
   id: d.id,
   label: d.label,
   colorDark: d.color.dark,
   colorLight: d.color.light,
   description: d.description,
-  count: domainCounts.get(d.id) || 0,
+  count: 0,
 }));
 ---
 
@@ -71,8 +24,8 @@ const domainInfo = domains.map((d) => ({
 
     <NetworkGraph
       client:only="react"
-      nodes={nodes}
-      links={links}
+      nodes={[]}
+      links={[]}
       domains={domainInfo}
     />
   </section>
